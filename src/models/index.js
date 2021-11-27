@@ -10,7 +10,7 @@ if (dbConfig.IS_SQLITE) {
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: dbConfig.SQLITE_PATH,
-    logging: true,
+    logging: process.env.NODE_ENV == 'development' ? true : false,
   });
 } else {
   sequelize = new Sequelize(
@@ -21,7 +21,7 @@ if (dbConfig.IS_SQLITE) {
       host: dbConfig.RDS_HOSTNAME,
       port: dbConfig.RDS_PORT,
       dialect: 'mysql',
-      logging: true,
+      logging: process.env.NODE_ENV == 'development' ? true : false,
     },
   );
 }
